@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jardín de Luz | Salud Mental y Bienestar Emocional</title>
+  <!-- Librería para generar código QR -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     :root {
       --verde-bosque: #2d5a27;
@@ -258,6 +260,124 @@
       font-size: 1.15rem;
     }
 
+    /* CHATBOT BAYMAX CON IA */
+    .baymax-container {
+      max-width: 780px;
+      margin: 0 auto;
+      background: var(--blanco);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra);
+      border: 1px solid #d5e5d8;
+      overflow: hidden;
+    }
+
+    .baymax-header {
+      background: linear-gradient(135deg, var(--verde-bosque), var(--verde-hoja));
+      color: var(--blanco);
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .baymax-avatar {
+      width: 48px;
+      height: 48px;
+      background: var(--blanco);
+      color: var(--texto-oscuro);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .baymax-status {
+      font-size: 0.85rem;
+      color: #d4edda;
+    }
+
+    .chat-mensajes {
+      height: 320px;
+      overflow-y: auto;
+      padding: 1.5rem;
+      background: #f7faf8;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .mensaje {
+      max-width: 80%;
+      padding: 0.9rem 1.2rem;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .mensaje.bot {
+      background: var(--blanco);
+      color: var(--texto-oscuro);
+      border: 1px solid #e2ebe4;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .mensaje.usuario {
+      background: var(--verde-bosque);
+      color: var(--blanco);
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-sugerencias {
+      padding: 0.7rem 1.5rem;
+      background: #f0f6f1;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      border-top: 1px solid #e2ebe4;
+    }
+
+    .sugerencia-chip {
+      background: var(--blanco);
+      border: 1px solid #c5dcc9;
+      color: var(--verde-bosque);
+      padding: 0.35rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .sugerencia-chip:hover {
+      background: var(--verde-suave);
+    }
+
+    .chat-input-area {
+      display: flex;
+      padding: 1rem;
+      background: var(--blanco);
+      border-top: 1px solid #e2ebe4;
+      gap: 0.6rem;
+    }
+
+    .chat-input-area input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: 1px solid #cbd9ce;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .chat-input-area input:focus {
+      border-color: var(--verde-bosque);
+    }
+
     /* EJERCICIO DE RESPIRACIÓN */
     .respiracion-panel {
       background: linear-gradient(135deg, #2d5a27, #4a7c59);
@@ -341,6 +461,41 @@
       margin-bottom: 0.6rem;
     }
 
+    /* SECCIÓN CONTACTO DIRECTO */
+    .contacto-botones {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn-contacto {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.6rem;
+      border-radius: 50px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--blanco);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .btn-contacto:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-tel {
+      background-color: #1f4e78;
+    }
+
+    .btn-wsp {
+      background-color: #25D366;
+      color: #0b3b1e;
+    }
+
     /* PIE DE PÁGINA ACADÉMICO */
     footer {
       background: var(--verde-bosque);
@@ -353,7 +508,7 @@
       max-width: 1150px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 2rem;
       padding-bottom: 2rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -369,6 +524,14 @@
       font-size: 0.92rem;
       list-style: none;
       margin-bottom: 0.35rem;
+    }
+
+    .qr-box {
+      background: var(--blanco);
+      padding: 10px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-top: 0.5rem;
     }
 
     .copyright {
@@ -412,10 +575,10 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#salud-mental">Salud Mental</a></li>
         <li><a href="#emociones">Emociones</a></li>
-        <li><a href="#estres">Manejo del Estrés</a></li>
-        <li><a href="#autocuidado">Autocuidado y Autoestima</a></li>
-        <li><a href="#relaciones">Relaciones y Ayuda</a></li>
-        <li><a href="#proyecto">Sobre el Proyecto</a></li>
+        <li><a href="#baymax-ia">Asistente Baymax IA</a></li>
+        <li><a href="#estres">Estrés</a></li>
+        <li><a href="#autocuidado">Autocuidado</a></li>
+        <li><a href="#contacto">Contacto</a></li>
       </ul>
     </div>
   </header>
@@ -428,7 +591,7 @@
       <p>
         Así como un jardín necesita atención, agua y luz para florecer, nuestra salud mental requiere tiempo, comprensión y hábitos saludables. Bienvenido a <strong>Jardín de Luz</strong>.
       </p>
-      <a href="#emociones" class="btn-primary">Explorar mis emociones</a>
+      <a href="#baymax-ia" class="btn-primary">Hablar con Baymax IA 🤖</a>
     </div>
   </section>
 
@@ -480,6 +643,42 @@
         <h4>😊 Alegría y Gratitud</h4>
         <p><strong>¿Qué nos indica?</strong> Señala bienestar, conexión y satisfacción con lo que vivimos.</p>
         <p><strong>Consejo de cuidado:</strong> Disfruta el momento presente, comparte tu entusiasmo con personas cercanas y anota aquello por lo que te sientes agradecido hoy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN CHATBOT BAYMAX CON IA -->
+  <section id="baymax-ia">
+    <div class="section-title">
+      <h2>Apoyo Emocional con Inteligencia Artificial</h2>
+      <p>Conversa con <strong>Baymax</strong>, tu compañero virtual de acompañamiento emocional diseñado para escucharte y brindarte calma en momentos difíciles.</p>
+    </div>
+
+    <div class="baymax-container">
+      <div class="baymax-header">
+        <div class="baymax-avatar">(•—•)</div>
+        <div>
+          <h3 style="margin: 0; font-size: 1.15rem;">Baymax • Asistente de Bienestar IA</h3>
+          <span class="baymax-status">● En línea | Listo para escucharte</span>
+        </div>
+      </div>
+
+      <div class="chat-mensajes" id="chatMensajes">
+        <div class="mensaje bot">
+          <strong>Hola, soy Baymax, tu compañero personal de bienestar emocional.</strong> (•—•)<br><br>
+          Estoy conectado con Inteligencia Artificial para acompañarte en situaciones de estrés, tristeza o ansiedad. En una escala del 1 al 10, ¿cómo calificarías tu estado de ánimo hoy? Cuéntame qué sientes.
+        </div>
+      </div>
+
+      <div class="chat-sugerencias">
+        <button class="sugerencia-chip" onclick="enviarSugerencia('Me siento muy estresado por los estudios')">😰 Tengo mucho estrés</button>
+        <button class="sugerencia-chip" onclick="enviarSugerencia('Me siento triste y sin ánimos hoy')">😢 Me siento triste</button>
+        <button class="sugerencia-chip" onclick="enviarSugerencia('Tengo ansiedad y no puedo calmarme')">😟 Tengo ansiedad</button>
+      </div>
+
+      <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="Escribe cómo te sientes aquí..." onkeypress="if(event.key==='Enter') enviarMensaje()" />
+        <button class="btn-primary" style="padding: 0.7rem 1.4rem;" onclick="enviarMensaje()">Enviar</button>
       </div>
     </div>
   </section>
@@ -557,46 +756,34 @@
     </div>
   </section>
 
-  <!-- RELACIONES INTERPERSONALES Y ORIENTACIÓN PROFESIONAL -->
-  <section id="relaciones">
+  <!-- RELACIONES INTERPERSONALES Y LÍNEAS DE CONTACTO -->
+  <section id="contacto">
     <div class="section-title">
-      <h2>Relaciones Saludables y Cuándo Buscar Ayuda</h2>
-      <p>Nadie tiene que cargar solo con sus dificultades. Pedir apoyo es un acto de valentía y autocuidado.</p>
+      <h2>Relaciones Saludables y Líneas de Apoyo</h2>
+      <p>Nadie tiene que cargar solo con sus dificultades. Si necesitas hablar con alguien o recibir orientación inmediata, comunícate por nuestros canales de contacto.</p>
     </div>
 
-    <div class="grid-3">
-      <div class="card">
-        <span class="card-icon">💬</span>
-        <h3>Comunicación Asertiva</h3>
-        <p>Expresa tus pensamientos y límites de manera clara, honesta y respetuosa, escuchando también activamente a los demás.</p>
-      </div>
-      <div class="card">
-        <span class="card-icon">🛡️</span>
-        <h3>Vínculos que Suman</h3>
-        <p>Rodéate de personas que valoren tu bienestar, respeten tus decisiones y fomenten un ambiente de confianza y apoyo.</p>
-      </div>
-      <div class="card">
-        <span class="card-icon">🩺</span>
-        <h3>Apoyo Profesional</h3>
-        <p>Si la tristeza, el miedo o el estrés persisten e interfieren con tu vida diaria, acudir a un psicólogo o orientador es el paso más saludable.</p>
-      </div>
-    </div>
-
-    <div class="alerta-ayuda">
-      <h3>⚠️ Nota Informativa Importante</h3>
-      <p>
-        La página web <strong>“Jardín de Luz”</strong> tiene un carácter estrictamente <strong>informativo y educativo</strong>. Su contenido busca promover la prevención y la educación emocional, por lo que <strong>no sustituye el diagnóstico, tratamiento ni la atención de profesionales de la salud mental</strong>. Si atraviesas una situación difícil, conversa con un familiar, docente, orientador o acude a un centro de salud cercano.
+    <div class="alerta-ayuda" style="text-align: center;">
+      <h3>📞 Canales de Atención y Orientación Directa</h3>
+      <p style="margin-bottom: 1rem;">
+        Recuerda que <strong>“Jardín de Luz”</strong> es un espacio informativo y educativo que <strong>no sustituye la atención médica o psicológica profesional</strong>. Si necesitas ayuda o quieres comunicarte con nosotros, utiliza los siguientes medios:
       </p>
+      <div class="contacto-botones">
+        <a href="tel:800113040" class="btn-contacto btn-tel">📞 Llamar gratis: 800 11 30 40</a>
+        <a href="https://wa.me/59177797667?text=Hola,%20visité%20la%20página%20Jardín%20de%20Luz%20y%20necesito%20información." target="_blank" rel="noopener noreferrer" class="btn-contacto btn-wsp">💬 WhatsApp: 77797667</a>
+      </div>
     </div>
   </section>
 
-  <!-- PIE DE PÁGINA INSTITUCIONAL -->
+  <!-- PIE DE PÁGINA INSTITUCIONAL CON QR -->
   <footer id="proyecto">
     <div class="footer-grid">
       <div>
         <h4>🌱 Proyecto “Jardín de Luz”</h4>
         <p>Desarrollo de una página web informativa sobre la salud mental y el bienestar emocional.</p>
         <p><strong>Carrera:</strong> Sistemas Informáticos – Nivel Técnico Medio.</p>
+        <p><strong>Teléfono:</strong> 800 11 30 40</p>
+        <p><strong>WhatsApp:</strong> +591 77797667</p>
       </div>
       <div>
         <h4>🏫 Institución Educativa</h4>
@@ -613,6 +800,11 @@
           <li><strong>Tutor:</strong> Lic. John Michael Mendoza Casanova</li>
         </ul>
       </div>
+      <div style="text-align: center;">
+        <h4>📱 Escanea y Comparte</h4>
+        <p>Accede desde tu celular:</p>
+        <div class="qr-box" id="qrcode"></div>
+      </div>
     </div>
     <div class="copyright">
       © 2026 Jardín de Luz | Bachillerato Técnico Humanístico (BTH) - Santa Cruz, Bolivia.
@@ -620,7 +812,23 @@
   </footer>
 
   <script>
-    // Menú desplegable en dispositivos móviles
+    // 1. Generar Código QR automáticamente con la URL de la página
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlDestino = (window.location.href && window.location.href.startsWith('http'))
+        ? window.location.href
+        : 'https://Rpca1356.github.io/Jardin-de-luz/';
+
+      new QRCode(document.getElementById("qrcode"), {
+        text: urlDestino,
+        width: 115,
+        height: 115,
+        colorDark: "#2d5a27",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    });
+
+    // 2. Menú desplegable en dispositivos móviles
     const menuBtn = document.getElementById('menuBtn');
     const navLinks = document.getElementById('navLinks');
 
@@ -628,14 +836,13 @@
       navLinks.classList.toggle('open');
     });
 
-    // Cerrar menú al hacer clic en un enlace (móvil)
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
       });
     });
 
-    // Explorador interactivo de emociones
+    // 3. Explorador interactivo de emociones
     const infoEmociones = {
       alegria: {
         titulo: '😊 Alegría y Gratitud',
@@ -677,7 +884,67 @@
       `;
     }
 
-    // Ejercicio interactivo de respiración
+    // 4. Lógica del Chatbot Baymax
+    function enviarSugerencia(texto) {
+      document.getElementById('chatInput').value = texto;
+      enviarMensaje();
+    }
+
+    function enviarMensaje() {
+      const input = document.getElementById('chatInput');
+      const texto = input.value.trim();
+      if (!texto) return;
+
+      agregarBurbuja(texto, 'usuario');
+      input.value = '';
+
+      setTimeout(() => {
+        const respuesta = generarRespuestaBaymax(texto.toLowerCase());
+        agregarBurbuja(respuesta, 'bot');
+      }, 600);
+    }
+
+    function agregarBurbuja(contenido, tipo) {
+      const chat = document.getElementById('chatMensajes');
+      const div = document.createElement('div');
+      div.className = `mensaje ${tipo}`;
+      div.textContent = '';
+
+      // Permite formato seguro básico con saltos de línea y negritas controladas
+      const partes = contenido.split(/(<strong>.*?<\/strong>|<br>)/g);
+      partes.forEach(parte => {
+        if (parte === '<br>') {
+          div.appendChild(document.createElement('br'));
+        } else if (parte.startsWith('<strong>') && parte.endsWith('</strong>')) {
+          const strong = document.createElement('strong');
+          strong.textContent = parte.replace(/^<strong>|<\/strong>$/g, '');
+          div.appendChild(strong);
+        } else if (parte) {
+          div.appendChild(document.createTextNode(parte));
+        }
+      });
+
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function generarRespuestaBaymax(msg) {
+      if (msg.includes('estres') || msg.includes('estrés') || msg.includes('tarea') || msg.includes('examen')) {
+        return 'He detectado niveles elevados de tensión. (•—•) Recuerda que no tienes que resolver todo en un solo minuto. Divide tus pendientes en pasos pequeños, toma un vaso de agua y prueba nuestro ejercicio de respiración 4-4 más abajo. ¿Quieres que hagamos una pausa juntos?';
+      }
+      if (msg.includes('triste') || msg.includes('llorar') || msg.includes('solo') || msg.includes('sola') || msg.includes('mal')) {
+        return 'Lamento que estés pasando por un momento difícil. Sentirse triste es una respuesta humana válida y no significa debilidad. (•—•) A veces hablar con un amigo, un familiar o escribir lo que sientes alivia el peso. Si necesitas hablar con un profesional, puedes llamar al 800 11 30 40.';
+      }
+      if (msg.includes('ansiedad') || msg.includes('miedo') || msg.includes('nervios') || msg.includes('panico')) {
+        return 'Estoy aquí contigo. Concentrémonos en el presente: nombra 3 cosas que puedas ver a tu alrededor y respira profundo conmigo durante 4 segundos. (•—•) Estás a salvo. Si esta sensación persiste, es muy recomendable conversar con un orientador o contactar nuestra línea de apoyo al 800 11 30 40.';
+      }
+      if (msg.includes('gracias') || msg.includes('mejor') || msg.includes('bien')) {
+        return 'Me alegra saber que te sientes un poco mejor. (•—•) Recuerda que mi objetivo es cuidar tu bienestar. Estaré aquí siempre que necesites conversar.';
+      }
+      return 'Gracias por compartir lo que sientes conmigo. (•—•) Escucharte es mi prioridad. Cuéntame un poco más sobre qué ha estado pasando hoy, o si prefieres recibir apoyo directo de una persona, recuerda que tienes disponible el teléfono <strong>800 11 30 40</strong> y el WhatsApp <strong>77797667</strong>.';
+    }
+
+    // 5. Ejercicio interactivo de respiración
     let respirando = false;
     let intervaloResp = null;
 

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jardín de Luz | Salud Mental y Bienestar Emocional</title>
+  <style>
+    :root {
+      --verde-bosque: #2d5a27;
+      --verde-hoja: #4a7c59;
+      --verde-suave: #e8f3ea;
+      --luz-dorada: #f6d365;
+      --crema-fondo: #fbfbf8;
+      --texto-oscuro: #243028;
+      --texto-gris: #526157;
+      --blanco: #ffffff;
+      --sombra: 0 8px 24px rgba(45, 90, 39, 0.08);
+      --radio: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--crema-fondo);
+      color: var(--texto-oscuro);
+      line-height: 1.65;
+    }
+
+    /* NAVEGACIÓN */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #e2ebe4;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .nav-container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--verde-bosque);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--texto-oscuro);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--verde-hoja);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: var(--verde-bosque);
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #e8f3ea 0%, #fef9e7 100%);
+      padding: 5rem 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid #e2ebe4;
+    }
+
+    .hero-content {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--blanco);
+      color: var(--verde-bosque);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      color: var(--verde-bosque);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--texto-gris);
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--verde-bosque);
+      color: var(--blanco);
+      padding: 0.85rem 1.8rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s, background-color 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--verde-hoja);
+      transform: translateY(-2px);
+    }
+
+    /* SECCIONES GENERALES */
+    section {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.8rem;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      color: var(--verde-bosque);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title p {
+      color: var(--texto-gris);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* GRID DE TARJETAS */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--blanco);
+      padding: 1.8rem;
+      border-radius: var(--radio);
+      box-shadow: var(--sombra);
+      border: 1px solid #edf2ee;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+    }
+
+    .card h3 {
+      color: var(--verde-bosque);
+      margin-bottom: 0.6rem;
+      font-size: 1.25rem;
+    }
+
+    .card p {
+      color: var(--texto-gris);
+      font-size: 0.96rem;
+    }
+
+    /* EXPLORADOR INTERACTIVO DE EMOCIONES */
+    .emociones-box {
+      background: var(--blanco);
+      border-radius: var(--radio);
+      padding: 2.2rem;
+      box-shadow: var(--sombra);
+      border: 1px solid #e2ebe4;
+      text-align: center;
+    }
+
+    .emociones-botones {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      margin: 1.5rem 0;
+    }
+
+    .emo-btn {
+      background: var(--verde-suave);
+      color: var(--verde-bosque);
+      border: 2px solid transparent;
+      padding: 0.7rem 1.3rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .emo-btn:hover, .emo-btn.active {
+      background: var(--verde-bosque);
+      color: var(--blanco);
+    }
+
+    .emocion-resultado {
+      background: #f9fbf9;
+      border-left: 5px solid var(--verde-hoja);
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: left;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .emocion-resultado h4 {
+      color: var(--verde-bosque);
+      margin-bottom: 0.4rem;
+      font-size: 1.15rem;
+    }
+
+    /* EJERCICIO DE RESPIRACIÓN */
+    .respiracion-panel {
+      background: linear-gradient(135deg, #2d5a27, #4a7c59);
+      color: var(--blanco);
+      border-radius: var(--radio);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+
+    .circulo-guia {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 3px solid #f6d365;
+      margin: 1.5rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: transform 4s ease-in-out;
+    }
+
+    .circulo-guia.inhalar {
+      transform: scale(1.3);
+      background: rgba(246, 211, 101, 0.35);
+    }
+
+    .circulo-guia.exhalar {
+      transform: scale(0.95);
+    }
+
+    .btn-light {
+      background: var(--luz-dorada);
+      color: var(--texto-oscuro);
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* LISTA DE HÁBITOS INTERACTIVOS */
+    .habitos-lista {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .habito-item {
+      background: var(--blanco);
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      border: 1px solid #e2ebe4;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+    }
+
+    .habito-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--verde-bosque);
+    }
+
+    /* AVISO PREVENTIVO Y AYUDA */
+    .alerta-ayuda {
+      background: #fff9e6;
+      border: 1px solid #f5dfa0;
+      border-radius: var(--radio);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .alerta-ayuda h3 {
+      color: #8a6400;
+      margin-bottom: 0.6rem;
+    }
+
+    /* PIE DE PÁGINA ACADÉMICO */
+    footer {
+      background: var(--verde-bosque);
+      color: #e8f3ea;
+      padding: 3rem 1.5rem 2rem;
+      margin-top: 3rem;
+    }
+
+    .footer-grid {
+      max-width: 1150px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .footer-grid h4 {
+      color: var(--luz-dorada);
+      margin-bottom: 0.7rem;
+      font-size: 1.1rem;
+    }
+
+    .footer-grid p, .footer-grid li {
+      font-size: 0.92rem;
+      list-style: none;
+      margin-bottom: 0.35rem;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 1.5rem;
+      font-size: 0.88rem;
+      color: #c8decb;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        padding-top: 1rem;
+        gap: 0.8rem;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ENCABEZADO Y NAVEGACIÓN -->
+  <header>
+    <div class="nav-container">
+      <a href="#inicio" class="logo">🌱 Jardín de Luz</a>
+      <button class="menu-toggle" id="menuBtn" aria-label="Abrir menú">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#salud-mental">Salud Mental</a></li>
+        <li><a href="#emociones">Emociones</a></li>
+        <li><a href="#estres">Manejo del Estrés</a></li>
+        <li><a href="#autocuidado">Autocuidado y Autoestima</a></li>
+        <li><a href="#relaciones">Relaciones y Ayuda</a></li>
+        <li><a href="#proyecto">Sobre el Proyecto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- SECCIÓN PRINCIPAL (HERO) -->
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <span class="badge">Espacio Educativo de Bienestar Emocional</span>
+      <h1>Cultiva tu mente, ilumina tu bienestar</h1>
+      <p>
+        Así como un jardín necesita atención, agua y luz para florecer, nuestra salud mental requiere tiempo, comprensión y hábitos saludables. Bienvenido a <strong>Jardín de Luz</strong>.
+      </p>
+      <a href="#emociones" class="btn-primary">Explorar mis emociones</a>
+    </div>
+  </section>
+
+  <!-- SALUD MENTAL -->
+  <section id="salud-mental">
+    <div class="section-title">
+      <h2>¿Qué es la Salud Mental?</h2>
+      <p>
+        La salud mental es un pilar fundamental para nuestro desarrollo integral: influye en cómo pensamos, sentimos, actuamos y nos relacionamos con los demás.
+      </p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <span class="card-icon">🧠</span>
+        <h3>Equilibrio Diario</h3>
+        <p>Nos permite afrontar las situaciones cotidianas, tomar decisiones conscientes y adaptarnos a los cambios de la vida escolar, familiar y social.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🤝</span>
+        <h3>Empatía y Respeto</h3>
+        <p>Hablar con naturalidad sobre las emociones ayuda a construir comunidades más solidarias, libres de prejuicios y abiertas al apoyo mutuo.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">☀️</span>
+        <h3>Prevención Activa</h3>
+        <p>Cuidar el bienestar emocional no es solo atender momentos difíciles, sino fortalecer cada día nuestra resiliencia y autoconocimiento.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECONOCIMIENTO DE EMOCIONES (INTERACTIVO) -->
+  <section id="emociones">
+    <div class="section-title">
+      <h2>Reconociendo Nuestras Emociones</h2>
+      <p>Todas las emociones son válidas y cumplen una función. Selecciona cómo te sientes hoy para recibir una orientación práctica.</p>
+    </div>
+
+    <div class="emociones-box">
+      <div class="emociones-botones">
+        <button class="emo-btn active" onclick="mostrarEmocion('alegria', this)">😊 Alegría</button>
+        <button class="emo-btn" onclick="mostrarEmocion('tristeza', this)">😢 Tristeza</button>
+        <button class="emo-btn" onclick="mostrarEmocion('ansiedad', this)">😟 Ansiedad / Estrés</button>
+        <button class="emo-btn" onclick="mostrarEmocion('enojo', this)">😠 Enojo</button>
+        <button class="emo-btn" onclick="mostrarEmocion('cansancio', this)">😴 Agotamiento</button>
+      </div>
+
+      <div class="emocion-resultado" id="resultadoEmocion">
+        <h4>😊 Alegría y Gratitud</h4>
+        <p><strong>¿Qué nos indica?</strong> Señala bienestar, conexión y satisfacción con lo que vivimos.</p>
+        <p><strong>Consejo de cuidado:</strong> Disfruta el momento presente, comparte tu entusiasmo con personas cercanas y anota aquello por lo que te sientes agradecido hoy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANEJO DEL ESTRÉS COTIDIANO -->
+  <section id="estres">
+    <div class="section-title">
+      <h2>Manejo del Estrés Cotidiano</h2>
+      <p>El estrés es una respuesta natural ante los retos, pero aprender a regularlo protege nuestra mente y nuestro cuerpo.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <span class="card-icon">📋</span>
+        <h3>Organiza tus Prioridades</h3>
+        <p>Divide las tareas grandes en pasos pequeños y realizables. Establecer horarios claros reduce la sensación de saturación.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📵</span>
+        <h3>Pausas Digitales</h3>
+        <p>Desconéctate unos minutos de las pantallas y redes sociales para descansar la vista y reducir la sobrecarga de información.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌿</span>
+        <h3>Conecta con tu Entorno</h3>
+        <p>Salir a caminar, escuchar música tranquila o conversar con alguien de confianza ayuda a liberar la tensión acumulada.</p>
+      </div>
+    </div>
+
+    <!-- HERRAMIENTA INTERACTIVA DE RESPIRACIÓN -->
+    <div class="respiracion-panel">
+      <h3>Ejercicio Guiado de Calma (Respiración 4-4)</h3>
+      <p>Tómate 30 segundos para regular tu ritmo respiratorio y calmar la mente.</p>
+      <div class="circulo-guia" id="circuloResp">Listo</div>
+      <button class="btn-light" id="btnRespirar" onclick="toggleRespiracion()">Iniciar Ejercicio</button>
+    </div>
+  </section>
+
+  <!-- AUTOCUIDADO, AUTOESTIMA Y HÁBITOS SALUDABLES -->
+  <section id="autocuidado">
+    <div class="section-title">
+      <h2>Autoestima y Hábitos Saludables</h2>
+      <p>Pequeñas acciones diarias fortalecen el amor propio y mantienen estable nuestro estado de ánimo.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <span class="card-icon">💛</span>
+        <h3>Autoestima Sana</h3>
+        <p>Reconoce tus logros y cualidades sin compararte constantemente con los demás. Trátate con la misma amabilidad con la que tratarías a un buen amigo.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌙</span>
+        <h3>Descanso Reparador</h3>
+        <p>Dormir entre 7 y 8 horas permite que el cerebro procese las emociones del día y recupere energía para aprender y concentrarse.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🥗</span>
+        <h3>Cuerpo y Mente Unidos</h3>
+        <p>Mantener una alimentación equilibrada, hidratarse bien y realizar actividad física regular favorece la producción natural de bienestar.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 2.5rem;">
+      <h3 style="color: var(--verde-bosque); margin-bottom: 0.5rem;">Checklist Diario de Bienestar</h3>
+      <p style="color: var(--texto-gris); font-size: 0.95rem;">Marca los hábitos saludables que has practicado hoy:</p>
+      <div class="habitos-lista">
+        <label class="habito-item"><input type="checkbox" /> Tomé suficiente agua durante el día</label>
+        <label class="habito-item"><input type="checkbox" /> Dormí y descansé adecuadamente</label>
+        <label class="habito-item"><input type="checkbox" /> Expresé lo que siento con respeto</label>
+        <label class="habito-item"><input type="checkbox" /> Realicé al menos 20 min de actividad física</label>
+        <label class="habito-item"><input type="checkbox" /> Dediqué tiempo a algo que disfruto</label>
+        <label class="habito-item"><input type="checkbox" /> Me hablé con paciencia y comprensión</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELACIONES INTERPERSONALES Y ORIENTACIÓN PROFESIONAL -->
+  <section id="relaciones">
+    <div class="section-title">
+      <h2>Relaciones Saludables y Cuándo Buscar Ayuda</h2>
+      <p>Nadie tiene que cargar solo con sus dificultades. Pedir apoyo es un acto de valentía y autocuidado.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <span class="card-icon">💬</span>
+        <h3>Comunicación Asertiva</h3>
+        <p>Expresa tus pensamientos y límites de manera clara, honesta y respetuosa, escuchando también activamente a los demás.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🛡️</span>
+        <h3>Vínculos que Suman</h3>
+        <p>Rodéate de personas que valoren tu bienestar, respeten tus decisiones y fomenten un ambiente de confianza y apoyo.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🩺</span>
+        <h3>Apoyo Profesional</h3>
+        <p>Si la tristeza, el miedo o el estrés persisten e interfieren con tu vida diaria, acudir a un psicólogo o orientador es el paso más saludable.</p>
+      </div>
+    </div>
+
+    <div class="alerta-ayuda">
+      <h3>⚠️ Nota Informativa Importante</h3>
+      <p>
+        La página web <strong>“Jardín de Luz”</strong> tiene un carácter estrictamente <strong>informativo y educativo</strong>. Su contenido busca promover la prevención y la educación emocional, por lo que <strong>no sustituye el diagnóstico, tratamiento ni la atención de profesionales de la salud mental</strong>. Si atraviesas una situación difícil, conversa con un familiar, docente, orientador o acude a un centro de salud cercano.
+      </p>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA INSTITUCIONAL -->
+  <footer id="proyecto">
+    <div class="footer-grid">
+      <div>
+        <h4>🌱 Proyecto “Jardín de Luz”</h4>
+        <p>Desarrollo de una página web informativa sobre la salud mental y el bienestar emocional.</p>
+        <p><strong>Carrera:</strong> Sistemas Informáticos – Nivel Técnico Medio.</p>
+      </div>
+      <div>
+        <h4>🏫 Institución Educativa</h4>
+        <p><strong>Módulo Tecnológico Productivo:</strong> “Santa Cruz” B.T.H. - Plan 3000</p>
+        <p><strong>Unidad Educativa:</strong> América C Fe y Alegría</p>
+        <p><strong>Lugar y Año:</strong> Santa Cruz – Bolivia, 2026</p>
+      </div>
+      <div>
+        <h4>👨‍💻 Equipo de Desarrollo</h4>
+        <ul>
+          <li><strong>Estudiantes:</strong></li>
+          <li>• Kevin Matias Burgos Montero</li>
+          <li>• Adrianne Rosibel Montero Zarate</li>
+          <li><strong>Tutor:</strong> Lic. John Michael Mendoza Casanova</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2026 Jardín de Luz | Bachillerato Técnico Humanístico (BTH) - Santa Cruz, Bolivia.
+    </div>
+  </footer>
+
+  <script>
+    // Menú desplegable en dispositivos móviles
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Cerrar menú al hacer clic en un enlace (móvil)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // Explorador interactivo de emociones
+    const infoEmociones = {
+      alegria: {
+        titulo: '😊 Alegría y Gratitud',
+        indica: 'Señala bienestar, conexión y satisfacción con lo que vivimos.',
+        consejo: 'Disfruta el momento presente, comparte tu entusiasmo con personas cercanas y anota aquello por lo que te sientes agradecido hoy.'
+      },
+      tristeza: {
+        titulo: '😢 Tristeza',
+        indica: 'Aparece ante pérdidas, decepciones o momentos sensibles; nos invita a hacer una pausa y procesar lo ocurrido.',
+        consejo: 'Permítete sentir sin juzgarte. Conversar con alguien de confianza, escribir lo que sientes o descansar puede ayudarte a aliviar la carga.'
+      },
+      ansiedad: {
+        titulo: '😟 Ansiedad o Estrés',
+        indica: 'Es una señal de alerta frente a preocupaciones, exámenes o incertidumbre sobre el futuro.',
+        consejo: 'Vuelve al presente: practica el ejercicio de respiración guiada de abajo, enfócate en una sola tarea a la vez y pide apoyo si te sientes sobrepasado.'
+      },
+      enojo: {
+        titulo: '😠 Enojo o Frustración',
+        indica: 'Surge cuando sentimos que algo es injusto o que se han cruzado nuestros límites.',
+        consejo: 'Antes de reaccionar, toma distancia unos minutos, respira profundo y expresa luego lo que te molesta de forma calmada y respetuosa.'
+      },
+      cansancio: {
+        titulo: '😴 Agotamiento Emocional o Físico',
+        indica: 'Tu mente y tu cuerpo necesitan recuperar energía tras mucho esfuerzo continuo.',
+        consejo: 'Prioriza el descanso, hidrátate, reduce exigencias innecesarias hoy y date permiso para desconectarte un rato.'
+      }
+    };
+
+    function mostrarEmocion(clave, boton) {
+      document.querySelectorAll('.emo-btn').forEach(btn => btn.classList.remove('active'));
+      boton.classList.add('active');
+
+      const data = infoEmociones[clave];
+      const contenedor = document.getElementById('resultadoEmocion');
+      contenedor.innerHTML = `
+        <h4>${data.titulo}</h4>
+        <p><strong>¿Qué nos indica?</strong> ${data.indica}</p>
+        <p><strong>Consejo de cuidado:</strong> ${data.consejo}</p>
+      `;
+    }
+
+    // Ejercicio interactivo de respiración
+    let respirando = false;
+    let intervaloResp = null;
+
+    function toggleRespiracion() {
+      const circulo = document.getElementById('circuloResp');
+      const boton = document.getElementById('btnRespirar');
+
+      if (!respirando) {
+        respirando = true;
+        boton.textContent = 'Detener Ejercicio';
+        cicloRespiracion();
+        intervaloResp = setInterval(cicloRespiracion, 8000);
+      } else {
+        respirando = false;
+        clearInterval(intervaloResp);
+        circulo.className = 'circulo-guia';
+        circulo.textContent = 'Listo';
+        boton.textContent = 'Iniciar Ejercicio';
+      }
+    }
+
+    function cicloRespiracion() {
+      const circulo = document.getElementById('circuloResp');
+      circulo.textContent = 'Inhala (4s)';
+      circulo.className = 'circulo-guia inhalar';
+
+      setTimeout(() => {
+        if (!respirando) return;
+        circulo.textContent = 'Exhala (4s)';
+        circulo.className = 'circulo-guia exhalar';
+      }, 4000);
+    }
+  </script>
+</body>
+</html>
